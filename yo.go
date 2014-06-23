@@ -54,13 +54,12 @@ func login() {
 
 func main() {
 
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "Usage: yo <username>\n")
-		os.Exit(0)
+	user := ""
+	if len(os.Args) == 2 {
+		user = os.Args[1]
+		user = strings.TrimPrefix(user, "@")
+		user = "@" + user
 	}
-
-	user := os.Args[1]
-	user = strings.TrimPrefix(user, "@")
 
 	if _, err := os.Stat(jsonFile()); os.IsNotExist(err) {
 		login()
@@ -77,7 +76,7 @@ func main() {
 		assert(err)
 	}
 
-	status := fmt.Sprintf("@" + user + " Yo")
+	status := fmt.Sprintf(user + " Yo")
 	response, err := Consumer.Post(
 		"https://api.twitter.com/1.1/statuses/update.json",
 		map[string]string{
