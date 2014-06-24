@@ -5,10 +5,19 @@ yo.go
 
 ## Usage
 
-Just set your friend twitter ID.
+Send yo !
 
 ```bash
 $ yo deeeet
+```
+
+## Install
+
+If you use OSX, you can install through brew:
+
+```bash
+$ brew tap tcnksm/yo
+$ brew install yo
 ```
 
 
