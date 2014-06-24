@@ -20,5 +20,6 @@ $ brew tap tcnksm/yo
 $ brew install yo
 ```
 
+If you are another platform install from [releae page](https://github.com/tcnksm/yo/releases)
 
 
