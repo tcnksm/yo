@@ -25,3 +25,7 @@ for PLATFORM in $(find ./pkg -mindepth 1 -maxdepth 1 -type d); do
     zip ${DIR}/pkg/dist/${ARCHIVE_NAME}.zip ./*
     popd
 done
+
+pushd ./pkg/dist
+shasum * > ./${VERSION}_SHASUMS
+popd
