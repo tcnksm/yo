@@ -96,6 +96,11 @@ func main() {
 		},
 		accessToken)
 
-	assert(err)
 	debug(response)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Same tweet?\n")
+		os.Exit(1)
+	}
+
+	fmt.Fprintf(os.Stderr, "Yo!\n")
 }
