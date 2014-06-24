@@ -15,6 +15,18 @@ import (
 
 var settingFile = ".yo.json"
 
+var consumerKey string = os.Getenv("CONSUMER_KEY")
+var consumerSecret string = os.Getenv("COMSUMER_SECRET")
+
+var Consumer = oauth.NewConsumer(
+	consumerKey,
+	consumerSecret,
+	oauth.ServiceProvider{
+		RequestTokenUrl:   "https://api.twitter.com/oauth/request_token",
+		AuthorizeTokenUrl: "https://api.twitter.com/oauth/authorize",
+		AccessTokenUrl:    "https://api.twitter.com/oauth/access_token",
+	})
+
 func debug(v ...interface{}) {
 	if os.Getenv("DEBUG") != "" {
 		log.Println(v...)
@@ -27,7 +39,7 @@ func assert(err error) {
 	}
 }
 
-func jsonFile() string {
+func tokenFile() string {
 	usr, err := user.Current()
 	assert(err)
 	return strings.Join([]string{usr.HomeDir, settingFile}, "/")
@@ -49,7 +61,7 @@ func login() {
 	json, err := json.Marshal(accessToken)
 	assert(err)
 
-	ioutil.WriteFile(jsonFile(), json, 0600)
+	ioutil.WriteFile(tokenFile(), json, 0600)
 }
 
 func main() {
@@ -61,11 +73,11 @@ func main() {
 		user = "@" + user
 	}
 
-	if _, err := os.Stat(jsonFile()); os.IsNotExist(err) {
+	if _, err := os.Stat(tokenFile()); os.IsNotExist(err) {
 		login()
 	}
 
-	file, err := os.Open(jsonFile())
+	file, err := os.Open(tokenFile())
 	assert(err)
 
 	accessToken := &oauth.AccessToken{}
