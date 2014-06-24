@@ -15,8 +15,8 @@ import (
 
 var settingFile = ".yo.json"
 
-var consumerKey string = "nKZ6DeyzWkwWvoGsQSajcy6uj"
-var consumerSecret string = "W3LbtwYHnVHZJXcfpSB4nD0fAOqRyPlsorgPe0hRgOrIYr64hZ"
+var consumerKey string = ""
+var consumerSecret string = ""
 
 var Consumer = oauth.NewConsumer(
 	consumerKey,
